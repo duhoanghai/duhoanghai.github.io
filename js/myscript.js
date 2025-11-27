@@ -58,3 +58,4 @@ if (isClose) {
 } else {
     message = "Thank you for staying with us";
 }
+console.log(message)
