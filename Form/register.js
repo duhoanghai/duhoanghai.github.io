@@ -30,6 +30,9 @@ function saveData() {
     sessionStorage.datascience = datascience;
     sessionStorage.game = game;
     sessionStorage.ai = ai;
+
+    var payment = document.getElementById("payment");
+    sessionStorage.payment = payment.value;
 }
 
 function prefilData() {
@@ -72,6 +75,8 @@ function prefilData() {
 		if (sessionStorage.python == "true") {
 			document.getElementById("python").checked = true;
 		} 
+
+        document.getElementById("payment").value = sessionStorage.payment
     }
 
 }
