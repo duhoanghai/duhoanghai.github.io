@@ -1,4 +1,4 @@
-function saveData() {
+function validate() {
     var firstname = document.getElementById("firstname").value;
     var lastname = document.getElementById("lastname").value;
     var email = document.getElementById("email").value;
@@ -33,8 +33,41 @@ function saveData() {
 
     var payment = document.getElementById("payment");
     sessionStorage.payment = payment.value;
-}
 
+    error_msg = " ";
+    // R1
+    if (firstname.match("^[A-Z a-z]{1,30}$") == null){
+        error_msg += "First name has to contain only characters and between 1 or 30 character <br>";
+    }
+    if (lastname.match("^[A-Z a-z]{1,30}$") == null){
+        error_msg += "Last name has to contain only characters and between 1 or 30 character <br>";
+    }
+    // R2
+    if (email.match("^[a-zA-Z]*@[a-zA-Z.]$") != null) {
+        error_msg += "Email has to contain @<br>";
+    }
+    // R3
+    if (phonenumber.match("^((/+84)|0)[0-9]{9,10}$") == null) {
+        error_msg += "Phone number has to start with +84 or 0 and contain 9 or 10 digits <br>";
+    }
+    // R4
+    if (isNaN(age) || age < 10 || age > 150) {
+        error_msg += "Age is invalid <br>";
+    }
+    // R5
+    if (sessionStorage.occupation == "highschool") {
+        if (age < 10 || age > 19) {
+            error_msg += "Age is not suitable for highschool <br>";
+        }
+    }
+    
+    if (error_msg == " ") {
+        return true;
+    } else {
+        document.getElementById("error").innerHTML = error_msg;
+        return false;
+    }
+}
 function prefilData() {
     if (sessionStorage.firstname != null) {
         document.getElementById("firstname").value = sessionStorage.firstname;
@@ -83,7 +116,7 @@ function prefilData() {
 
 function init() {
     var regForm = document.getElementById("registerForm");
-    regForm.onsubmit = saveData;
+    regForm.onsubmit = validate;
 
     prefilData();
 }
